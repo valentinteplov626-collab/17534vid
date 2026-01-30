@@ -1,6 +1,9 @@
 <!doctype html>
 <html data-version="production-archive-v0.0.123" data-landing-name="player" lang="">
 
+<!doctype html>
+<html data-version="production-archive-v0.0.123" data-landing-name="player" lang="">
+
 <head>
 
     <script>
@@ -32,40 +35,54 @@
 
     <style>
         body {
-            background-color: #000; /* Черный фон на случай если видео не прогрузится сразу */
+            background-color: #000;
         }
-        /* Контейнер для видео на заднем плане */
         .video-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0; /* Самый нижний слой, но выше фона body */
+            z-index: 0;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        
-        /* Само видео (webp) */
         .video-bg img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Растягивает видео на весь экран, обрезая лишнее */
-            opacity: 0.8; /* Легкая прозрачность, чтобы не сливалось */
+            object-fit: cover;
+            opacity: 0.8;
         }
-
-        /* Корректируем существующие слои ProPush, чтобы они были поверх видео */
         .overlay {
-            z-index: 1 !important; /* Затемнение поверх видео */
-            background: rgba(0, 0, 0, 0.6) !important; /* Усиливаем затемнение для читаемости */
+            z-index: 1 !important;
+            background: rgba(0, 0, 0, 0.6) !important;
         }
         .modal {
-            z-index: 10 !important; /* Окно поверх всего */
+            z-index: 10 !important;
         }
         .toolbar {
-            z-index: 5 !important; /* Плеер поверх видео */
+            z-index: 5 !important;
+        }
+    </style>
+
+    <style>
+        /* 1. Блокируем прокрутку страницы намертво */
+        html, body {
+            overflow: hidden !important;
+            position: fixed !important;
+            width: 100%;
+            height: 100%;
+            /* Этот хак предотвращает "резиновое" прокручивание на iOS */
+            overscroll-behavior: none; 
+        }
+
+        /* 2. Сдвигаем табличку вниз */
+        .modal {
+            /* Добавляем отступ сверху.
+               Поиграй с этим значением: 60px, 80px, 100px, чтобы стало идеально. */
+            margin-top: 80px !important;
         }
     </style>
 
